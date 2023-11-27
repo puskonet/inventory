@@ -46,7 +46,7 @@
                 $satuan       = $_POST['satuan'];
                 $harga        = $_POST['harga'];
 				
-				$update = mysqli_query($koneksi, "UPDATE produk SET nama_produk='$nama_produk', jenis_barang='$jenis_barang', kategori='$kategori', qty='$qty', satuan='$satuan', harga='$harga' WHERE id_produk='$id_produk'") or die(mysqli_error());
+				$update = mysqli_query($koneksi, "UPDATE produk SET id_produk='$id_produk', nama_produk='$nama_produk', jenis_barang='$jenis_barang', kategori='$kategori', qty='$qty', satuan='$satuan', harga='$harga' ") or die(mysqli_error());
 				if($update){
 					echo '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data berhasil disimpan.</div>';
 				}else{

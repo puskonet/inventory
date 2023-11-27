@@ -1,4 +1,5 @@
 <?php include "session.php"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,8 +51,8 @@
 						echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> Data gagal dihapus.</div>';
 					}
         } else if($stat == 'IN'){
-					$insert = mysqli_query($koneksi, "INSERT FROM transaksi WHERE id='$id'");
-          $qu = mysqli_query($koneksi, "UPDATE produk SET qty=(qty+'$quan') WHERE id_produk='$id_prod'");
+					$delete = mysqli_query($koneksi, "DELETE FROM transaksi WHERE id='$id'");
+          $qu = mysqli_query($koneksi, "UPDATE produk SET qty=(qty-'$quan') WHERE id_produk='$id_prod'");
                     
 					if($delete){
 						echo '<div class="alert alert-primary alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> Data berhasil dihapus.</div>';
