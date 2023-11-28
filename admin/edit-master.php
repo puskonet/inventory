@@ -31,13 +31,13 @@
           <p class="mb-4">Inventory<sup>App</sup> PT. PUSKOMEDIA INDONESIA KREATIF</p>
           <?php
             $kd = $_GET['id'];
-			$sql = mysqli_query($koneksi, "SELECT * FROM produk WHERE id_produk='$kd'");
-			if(mysqli_num_rows($sql) == 0){
-				header("Location: master.php");
-			}else{
-				$row = mysqli_fetch_assoc($sql);
-			}
-			if(isset($_POST['update'])){
+      $sql = mysqli_query($koneksi, "SELECT * FROM produk WHERE id_produk='$kd'");
+      if(mysqli_num_rows($sql) == 0){
+        header("Location: master.php");
+      }else{
+        $row = mysqli_fetch_assoc($sql);
+      }
+      if(isset($_POST['update'])){
                 $id_produk    = $_POST['id_produk'];
                 $nama_produk  = $_POST['nama_produk'];
                 $jenis_barang = $_POST['jenis_barang'];
@@ -45,19 +45,21 @@
                 $qty          = $_POST['qty'];
                 $satuan       = $_POST['satuan'];
                 $harga        = $_POST['harga'];
-				
-				$update = mysqli_query($koneksi, "UPDATE produk SET id_produk='$id_produk', nama_produk='$nama_produk', jenis_barang='$jenis_barang', kategori='$kategori', qty='$qty', satuan='$satuan', harga='$harga' ") or die(mysqli_error());
-				if($update){
-					echo '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data berhasil disimpan.</div>';
-				}else{
-					echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data gagal disimpan, silahkan coba lagi.</div>';
-				}
-			}
-			
-			//if(isset($_GET['pesan']) == 'sukses'){
-			//	echo '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data berhasil disimpan.</div>';
-			//}
-			?>
+        
+        $update = mysqli_query($koneksi, "UPDATE produk SET nama_produk='$nama_produk', jenis_barang='$jenis_barang', kategori='$kategori', qty='$qty', satuan='$satuan', harga='$harga' WHERE id_produk='$id_produk'") or die(mysqli_error());
+        if($update){
+          echo '<div class="alert alert-info alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data berhasil disimpan.</div>';
+     echo "<meta http-equiv='refresh' content='2'>";
+
+        }else{
+          echo '<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data gagal disimpan, silahkan coba lagi.</div>';
+        }
+      }
+      
+      //if(isset($_GET['pesan']) == 'sukses'){
+      //  echo '<div class="alert alert-success alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data berhasil disimpan.</div>';
+      //}
+      ?>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
@@ -120,7 +122,7 @@
                               <label class="col-sm-2 col-sm-2 control-label"></label>
                               <div class="col-sm-10">
                                   <input type="submit" name="update" value="Update" class="btn btn-sm btn-primary" />&nbsp;
-	                              <a href="master.php" class="btn btn-sm btn-danger">Batal </a>
+                                <a href="master.php" class="btn btn-sm btn-danger">Batal </a>
                               </div>
                           </div>
                       </form>
@@ -139,21 +141,21 @@
 
   <script>
         $(document).ready(function() {
-				var dataTable = $('#lookup').DataTable( {
-					"processing": true,
-					"serverSide": true,
-					"ajax":{
-						url :"ajax-data-user.php", // json datasource
-						type: "post",  // method  , by default get
-						error: function(){  // error handling
-							$(".lookup-error").html("");
-							$("#lookup").append('<tbody class="employee-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
-							$("#lookup_processing").css("display","none");
-							
-						}
-					}
-				} );
-			} );
+        var dataTable = $('#lookup').DataTable( {
+          "processing": true,
+          "serverSide": true,
+          "ajax":{
+            url :"ajax-data-master.php", // json datasource
+            type: "post",  // method  , by default get
+            error: function(){  // error handling
+              $(".lookup-error").html("");
+              $("#lookup").append('<tbody class="employee-grid-error"><tr><th colspan="3">No data found in the server</th></tr></tbody>');
+              $("#lookup_processing").css("display","none");
+              
+            }
+          }
+        } );
+      } );
         </script>
 </body>
 
